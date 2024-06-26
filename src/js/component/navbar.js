@@ -1,17 +1,26 @@
+// src/component/navbar.js
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light mb-3">
-			<Link to="/">
-				<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-			</Link>
-			<div className="ml-auto me-5">
-				<Link to="/AddContact">
-					<button className="btn btn-primary">Create New Contact</button>
-				</Link>
-			</div>
-		</nav>
-	);
+    const navigate = useNavigate();
+
+    const handleCreateNewContact = () => {
+        navigate("/add-contact");
+    };
+
+    return (
+        <nav className="navbar navbar-light bg-light">
+            <div className="container">
+                <Link className="navbar-brand" to="/">
+                    Contact List
+                </Link>
+                <div className="ml-auto">
+                    <button className="btn btn-primary" onClick={handleCreateNewContact}>
+                        Create New Contact
+                    </button>
+                </div>
+            </div>
+        </nav>
+    );
 };

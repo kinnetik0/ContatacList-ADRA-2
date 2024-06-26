@@ -1,42 +1,70 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			contacts: []
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			getContacts: async () => {
+				try {
+					let response = await fetch("https://playground.4geeks.com/contact/agendas/ADRA/contacts");
+					if (!response.ok) {
+						throw new Error("HTTP error " + response.status);
+					}
+					let data = await response.json();
+					setStore({ contacts: data.contacts });
+				} catch (error) {
+					console.error("Error fetching contacts:", error);
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+
+			addContact: async contact => {
+				try {
+					let response = await fetch("https://playground.4geeks.com/contact/agendas/ADRA/contacts", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(contact)
+					});
+					if (!response.ok) {
+						throw new Error("HTTP error " + response.status);
+					}
+					getActions().getContacts();
+				} catch (error) {
+					console.error("Error adding contact:", error);
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+			updateContact: async (id, updatedContact) => {
+				try {
+					let response = await fetch(`https://playground.4geeks.com/contact/agendas/ADRA/contacts/${id}`, {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(updatedContact)
+					});
+					if (!response.ok) {
+						throw new Error("HTTP error " + response.status);
+					}
+					getActions().getContacts();
+				} catch (error) {
+					console.error("Error updating contact:", error);
+				}
+			},
 
-				//reset the global store
-				setStore({ demo: demo });
+			deleteContact: async id => {
+				try {
+					let response = await fetch(`https://playground.4geeks.com/contact/agendas/ADRA/contacts/${id}`, {
+						method: "DELETE"
+					});
+					if (!response.ok) {
+						throw new Error("HTTP error " + response.status);
+					}
+					getActions().getContacts();
+				} catch (error) {
+					console.error("Error deleting contact:", error);
+				}
 			}
 		}
 	};

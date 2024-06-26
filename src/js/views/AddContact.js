@@ -1,22 +1,95 @@
-import React from "react";
-export function AddContact() {
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-10 bg-grey">
-          <p>Full Name</p>
-          <input type="text" className="bg-light col-12"></input>
-          <p>Email</p>
-          <input type="text" className="bg-light col-12"></input>
-          <p>Phone</p>
-          <input type="text" className="bg-light col-12"></input>
-          <p>Address</p>
-          <input type="text" className="bg-light col-12"></input>
-          <button type="button" className="btn btn-primary mt-3 col-12">
-            Custom button
-          </button>
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Context } from "../store/appContext";
+
+export const AddContact = () => {
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+    const location = useLocation();
+    const contactToEdit = location.state?.contact;
+
+    const [contact, setContact] = useState({
+        name: "",
+        email: "",
+        phone: "",
+        address: ""
+    });
+
+    useEffect(() => {
+        if (contactToEdit) {
+            setContact(contactToEdit);
+        }
+    }, [contactToEdit]);
+
+    const handleChange = (e) => {
+        setContact({
+            ...contact,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (contactToEdit) {
+            actions.updateContact(contact.id, contact);
+        } else {
+            actions.addContact(contact);
+        }
+        navigate("/");
+    };
+
+    return (
+        <div className="container">
+            <h1>{contactToEdit ? "Edit Contact" : "Add Contact"}</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Name</label>
+                    <input
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        value={contact.name}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        value={contact.email}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Phone</label>
+                    <input
+                        type="text"
+                        name="phone"
+                        className="form-control"
+                        value={contact.phone}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Address</label>
+                    <input
+                        type="text"
+                        name="address"
+                        className="form-control"
+                        value={contact.address}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn btn-primary">
+                    {contactToEdit ? "Update Contact" : "Add Contact"}
+                </button>
+            </form>
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
