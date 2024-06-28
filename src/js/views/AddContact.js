@@ -12,7 +12,7 @@ export const AddContact = () => {
         name: "",
         email: "",
         phone: "",
-        address: ""
+        address: "",
     });
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export const AddContact = () => {
     const handleChange = (e) => {
         setContact({
             ...contact,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         });
     };
 

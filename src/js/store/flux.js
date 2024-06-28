@@ -1,73 +1,106 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			contacts: []
-		},
-		actions: {
-			getContacts: async () => {
-				try {
-					let response = await fetch("https://playground.4geeks.com/contact/agendas/ADRA/contacts");
-					if (!response.ok) {
-						throw new Error("HTTP error " + response.status);
-					}
-					let data = await response.json();
-					setStore({ contacts: data.contacts });
-				} catch (error) {
-					console.error("Error fetching contacts:", error);
-				}
-			},
+    return {
+        store: {
+            agenda: "ADRA", // Puedes cambiar esto según tu necesidad
+            contacts: [],
+        },
+        actions: {
+            getContacts: async () => {
+                try {
+                    const agendaName = getStore().agenda;
+                    const response = await fetch(
+                        `https://playground.4geeks.com/contact/agendas/${agendaName}/contacts`
+                    );
+                    if (response.status === 404) {
+                        await getActions().createAgenda();
+                    }
+                    if (!response.ok) {
+                        throw new Error(`API Error: ${response.statusText}`);
+                    }
+                    const data = await response.json();
+                    setStore({ contacts: data.contacts });
+                } catch (error) {
+                    console.error("Error fetching contacts:", error);
+                }
+            },
 
-			addContact: async contact => {
-				try {
-					let response = await fetch("https://playground.4geeks.com/contact/agendas/ADRA/contacts", {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(contact)
-					});
-					if (!response.ok) {
-						throw new Error("HTTP error " + response.status);
-					}
-					getActions().getContacts();
-				} catch (error) {
-					console.error("Error adding contact:", error);
-				}
-			},
+            createAgenda: async () => {
+                const agendaName = getStore().agenda;
+                try {
+                    await fetch(
+                        `https://playground.4geeks.com/contact/agendas/${agendaName}`,
+                        {
+                            method: "POST",
+                        }
+                    );
+                } catch (error) {
+                    console.error("Error creating agenda:", error);
+                }
+            },
 
-			updateContact: async (id, updatedContact) => {
-				try {
-					let response = await fetch(`https://playground.4geeks.com/contact/agendas/ADRA/contacts/${id}`, {
-						method: "PUT",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify(updatedContact)
-					});
-					if (!response.ok) {
-						throw new Error("HTTP error " + response.status);
-					}
-					getActions().getContacts();
-				} catch (error) {
-					console.error("Error updating contact:", error);
-				}
-			},
+            addContact: async (contact) => {
+                try {
+                    const agendaName = getStore().agenda;
+                    const response = await fetch(
+                        `https://playground.4geeks.com/contact/agendas/${agendaName}/contacts`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(contact),
+                        }
+                    );
+                    if (!response.ok) {
+                        throw new Error(`HTTP error ${response.status}`);
+                    }
+                    getActions().getContacts();
+                } catch (error) {
+                    console.error("Error adding contact:", error);
+                }
+            },
 
-			deleteContact: async id => {
-				try {
-					let response = await fetch(`https://playground.4geeks.com/contact/agendas/ADRA/contacts/${id}`, {
-						method: "DELETE"
-					});
-					if (!response.ok) {
-						throw new Error("HTTP error " + response.status);
-					}
-					getActions().getContacts();
-				} catch (error) {
-					console.error("Error deleting contact:", error);
-				}
-			}
-		}
-	};
+            updateContact: async (id, updatedContact) => {
+                try {
+                    const agendaName = getStore().agenda;
+                    const response = await fetch(
+                        `https://playground.4geeks.com/contact/agendas/${agendaName}/contacts/${id}`,
+                        {
+                            method: "PUT",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(updatedContact),
+                        }
+                    );
+                    if (!response.ok) {
+                        throw new Error(`HTTP error ${response.status}`);
+                    }
+                    getActions().getContacts();
+                } catch (error) {
+                    console.error("Error updating contact:", error);
+                }
+            },
+
+            deleteContact: async (id) => {
+                try {
+                    const agendaName = getStore().agenda;
+                    const response = await fetch(
+                        `https://playground.4geeks.com/contact/agendas/${agendaName}/contacts/${id}`,
+                        {
+                            method: "DELETE",
+                        }
+                    );
+                    if (!response.ok) {
+                        throw new Error(`HTTP error ${response.status}`);
+                    }
+                    getActions().getContacts();
+                } catch (error) {
+                    console.error("Error deleting contact:", error);
+                }
+            },
+        },
+    };
 };
 
 export default getState;
