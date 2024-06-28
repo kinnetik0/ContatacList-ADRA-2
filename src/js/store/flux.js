@@ -52,7 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     );
                     if (!response.ok) {
-                        throw new Error(`HTTP error ${response.status}`);
+                        throw new Error(`API Error: ${response.statusText}`);
                     }
                     getActions().getContacts();
                 } catch (error) {
@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     );
                     if (!response.ok) {
-                        throw new Error(`HTTP error ${response.status}`);
+                        throw new Error(`API Error: ${response.statusText}`);
                     }
                     getActions().getContacts();
                 } catch (error) {
@@ -92,7 +92,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                         }
                     );
                     if (!response.ok) {
-                        throw new Error(`HTTP error ${response.status}`);
+                        throw new Error(`API Error: ${response.statusText}`);
                     }
                     getActions().getContacts();
                 } catch (error) {

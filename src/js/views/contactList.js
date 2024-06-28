@@ -5,7 +5,7 @@ import ContactCard from "../component/ContactCard.jsx";
 
 export const ContactList = () => {
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate(); // Asegúrate de importar useNavigate desde react-router-dom
+    const navigate = useNavigate();
 
     const handleDeleteContact = (id) => {
         actions.deleteContact(id);
