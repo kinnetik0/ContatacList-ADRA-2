@@ -12,11 +12,10 @@ export const Modal = ({ show, title, message, onConfirm, onCancel }) => {
                         <h5 className="modal-title">{title}</h5>
                         <button
                             type="button"
-                            className="close"
+                            className="btn-close"
+                            aria-label="Close"
                             onClick={onCancel}
-                        >
-                            <span>&times;</span>
-                        </button>
+                        ></button>
                     </div>
                     <div className="modal-body">
                         <p>{message}</p>
@@ -27,14 +26,14 @@ export const Modal = ({ show, title, message, onConfirm, onCancel }) => {
                             className="btn btn-secondary"
                             onClick={onCancel}
                         >
-                            Cancel
+                            Oh no!
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            Confirm
+                            Oh yes babay!
                         </button>
                     </div>
                 </div>

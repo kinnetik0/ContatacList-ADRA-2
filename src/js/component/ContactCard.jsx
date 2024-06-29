@@ -72,8 +72,8 @@ const ContactCard = ({ contact, onDelete, onUpdate }) => {
             </div>
             <Modal
                 show={showModal}
-                title="Confirm Delete"
-                message={`Are you sure you want to delete ${contact.name}?`}
+                title="Confirm Delete Contact"
+                message={`Are you sure do you want to delete ${contact.name}?`}
                 onConfirm={handleConfirmDelete}
                 onCancel={handleCancelDelete}
             />

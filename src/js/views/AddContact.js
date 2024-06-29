@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const AddContact = () => {
@@ -86,9 +86,13 @@ export const AddContact = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary col-12 mt-3">
                     {contactToEdit ? "Update Contact" : "Add Contact"}
                 </button>
+                <br />
+                <Link className="mt-3 w-100 text-center" to="/">
+                    or get back to contacts
+                </Link>
             </form>
         </div>
     );
