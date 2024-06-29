@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { Modal } from "./Modal.jsx"; // Asegúrate de importar el componente Modal
 
 const ContactCard = ({ contact, onDelete, onUpdate }) => {
@@ -27,31 +26,48 @@ const ContactCard = ({ contact, onDelete, onUpdate }) => {
         <li className="list-group-item">
             <div className="row w-100">
                 <div className="col-12 col-sm-6 col-md-3 px-0">
-                    {/* <img src={MikePhoto} alt="Mike Anamendolla" className="rounded-circle mx-auto d-block img-fluid" /> */}
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp5ht-DmJQ3JIw-sV3MgaLrhMeT5conJ86MA&s"
+                        alt="Mike Anamendolla"
+                        className="rounded-circle mx-auto d-block img-fluid"
+                        width="100"
+                    />
                 </div>
-                <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                    <div className=" float-right">
-                        <i
-                            className="fas fa-pencil-alt mr-3"
-                            style={{ cursor: "pointer" }}
-                            onClick={handleUpdateClick}
-                        />
-                        <i
-                            className="fas fa-trash-alt"
-                            style={{ cursor: "pointer" }}
-                            onClick={handleDeleteClick}
-                        />
+                <div className="col-12 col-sm-6 col-md-6 d-flex flex-column justify-content-center">
+                    <strong
+                        className="name lead"
+                        style={{ color: "black", fontWeight: "bold" }}
+                    >
+                        {contact.name}
+                    </strong>
+                    <div>
+                        <i className="fas fa-map-marker-alt me-3" />
+                        <span className="text-muted">{contact.address}</span>
                     </div>
-                    <label className="name lead">{contact.name}</label>
-                    <br />
-                    <i className="fas fa-map-marker-alt text-muted mr-3" />
-                    <span className="text-muted">{contact.address}</span>
-                    <br />
-                    <span className="fa fa-phone fa-fw text-muted mr-3" />
-                    <span className="text-muted small">{contact.phone}</span>
-                    <br />
-                    <span className="fa fa-envelope fa-fw text-muted mr-3" />
-                    <span className="text-muted small">{contact.email}</span>
+                    <div>
+                        <span className="fa fa-phone fa-fw me-2" />
+                        <span className="text-muted small">
+                            {contact.phone}
+                        </span>
+                    </div>
+                    <div>
+                        <span className="fa fa-envelope fa-fw me-2" />
+                        <span className="text-muted small">
+                            {contact.email}
+                        </span>
+                    </div>
+                </div>
+                <div className="col-12 col-sm-12 col-md-3 text-right d-flex align-items-center justify-content-end">
+                    <i
+                        className="fas fa-pencil-alt mr-3"
+                        style={{ cursor: "pointer", fontSize: "1.5rem" }}
+                        onClick={handleUpdateClick}
+                    />
+                    <i
+                        className="fas fa-trash-alt ms-5"
+                        style={{ cursor: "pointer", fontSize: "1.5rem" }}
+                        onClick={handleDeleteClick}
+                    />
                 </div>
             </div>
             <Modal

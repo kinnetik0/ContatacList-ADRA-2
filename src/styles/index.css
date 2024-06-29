@@ -1,3 +1,7 @@
 /* 
     General Styles
 */
+.fas.fa-pencil-alt:hover,
+.fas.fa-trash-alt:hover {
+    color: red;
+}
