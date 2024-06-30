@@ -48,6 +48,7 @@ export const AddContact = () => {
                         type="text"
                         name="name"
                         className="form-control"
+                        placeholder="Name"
                         value={contact.name}
                         onChange={handleChange}
                         required
@@ -59,6 +60,7 @@ export const AddContact = () => {
                         type="email"
                         name="email"
                         className="form-control"
+                        placeholder="Email"
                         value={contact.email}
                         onChange={handleChange}
                         required
@@ -70,6 +72,7 @@ export const AddContact = () => {
                         type="text"
                         name="phone"
                         className="form-control"
+                        placeholder="Phone"
                         value={contact.phone}
                         onChange={handleChange}
                         required
@@ -81,6 +84,7 @@ export const AddContact = () => {
                         type="text"
                         name="address"
                         className="form-control"
+                        placeholder="Address"
                         value={contact.address}
                         onChange={handleChange}
                         required
