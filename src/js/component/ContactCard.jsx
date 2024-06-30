@@ -28,7 +28,7 @@ const ContactCard = ({ contact, onDelete, onUpdate }) => {
                 <div className="col-12 col-sm-6 col-md-3 px-0">
                     <img
                         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp5ht-DmJQ3JIw-sV3MgaLrhMeT5conJ86MA&s"
-                        alt="Mike Anamendolla"
+                        alt="Reina de Dragones"
                         className="rounded-circle mx-auto d-block img-fluid"
                         width="100"
                     />

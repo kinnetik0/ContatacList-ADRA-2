@@ -69,7 +69,7 @@ export const AddContact = () => {
                 <div className="form-group">
                     <label>Phone</label>
                     <input
-                        type="text"
+                        type="number"
                         name="phone"
                         className="form-control"
                         placeholder="Phone"
