@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
     return {
         store: {
-            agenda: "ADRA", // Puedes cambiar esto según tu necesidad
+            agenda: "ADRA",
             contacts: [],
         },
         actions: {
