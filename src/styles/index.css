@@ -1,6 +1,10 @@
 /* 
     General Styles
 */
+body {
+    background-color: rgb(154, 200, 244);
+}
+
 .fas.fa-pencil-alt:hover,
 .fas.fa-trash-alt:hover {
     color: red;
