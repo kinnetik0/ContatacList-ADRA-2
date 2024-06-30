@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Modal } from "./Modal.jsx"; // Asegúrate de importar el componente Modal
+import { Modal } from "./Modal.jsx";
 
 const ContactCard = ({ contact, onDelete, onUpdate }) => {
     const [showModal, setShowModal] = useState(false);
