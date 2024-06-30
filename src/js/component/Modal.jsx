@@ -33,7 +33,7 @@ export const Modal = ({ show, title, message, onConfirm, onCancel }) => {
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            Oh yes babay!
+                            Oh yes baby!
                         </button>
                     </div>
                 </div>
